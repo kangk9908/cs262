@@ -1,54 +1,44 @@
 /************************************************
 * App.js for cs262                              *
-* Lab06
+* Lab06                                         *
 * Professor Keith VanderLinden                  *
 * Done by: Kun Kang                             *
 * 08 October 2021                               *
 *************************************************/
-import React, { Component } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ActivityIndicator, FlatList, Text, View } from 'react-native';
 
-export default class App extends Component {
-  constructor(props) {
-    super(props);
+export default function App () {
+  const [isLoading, setLoading] = useState(true);
+  const [data, setData] = useState([]);
 
-    this.state = {
-      data: [],
-      isLoading: true
-    };
-  }
-
-  async getBooks() {
-    try {
+  const getBooks = async () => {
+     try {
       const response = await fetch('https://www.googleapis.com/books/v1/volumes?q=jane%20austen');
       const json = await response.json();
-      this.setState({ data: json.items });
+      setData(json.items);
     } catch (error) {
-      console.log(error);
+      console.error(error);
     } finally {
-      this.setState({ isLoading: false });
+      setLoading(false);
     }
   }
 
-  componentDidMount() {
-    this.getBooks();
-  }
+  useEffect(() => {
+    getBooks();
+  }, []);
 
-  render() {
-    const { data, isLoading } = this.state;
-
-    return (
-      <View style={{ flex: 1, padding: 24 }}>
-        {isLoading ? <ActivityIndicator/> : (
-          <FlatList
-            data={data}
-            keyExtractor={({ id }, index) => id}
-            renderItem={({ item }) => (
-              <Text> {item.volumeInfo.title}, {item.volumeInfo.publishedDate}</Text>
-            )}
-          />
-        )}
-      </View>
-    );
-  }
+  return (
+    <View style={{ flex: 1, padding: 24 }}>
+      {isLoading ? <ActivityIndicator/> : (
+        <FlatList
+          data={data}
+          keyExtractor={({ id }, index) => id}
+          renderItem={({ item }) => (
+            <Text> {item.volumeInfo.title}, {item.volumeInfo.publishedDate}</Text>
+          )}
+        />
+      )}
+    </View>
+  );
 };
