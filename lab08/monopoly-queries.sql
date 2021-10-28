@@ -20,7 +20,7 @@ SELECT *
 -- Get a list of players who have (non-NULL) names.
 SELECT *
   FROM Player
- WHERE name IS NOT NULL
+ WHERE name IS NOT null
  ;
 
 -- Get a list of IDs for players who have some game score larger than 2000.
@@ -50,6 +50,8 @@ SELECT name
   WHERE playerID = PlayerGame.playerID
     AND PlayerGame.gameID = game.ID
     AND Game.time = timestamp '2006-06-28 13:20:00'
+  ORDER BY score DESC
+  LIMIT 1;
 --So what does that P1.ID < P2.ID clause do in the last example query (from SQL Examples)?
   -- It is making sure that you only get results from each one only once
 

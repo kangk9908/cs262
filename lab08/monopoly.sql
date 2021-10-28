@@ -64,9 +64,9 @@ INSERT INTO Player(ID, emailAddress) VALUES (1, 'me@calvin.edu');
 INSERT INTO Player VALUES (2, 'king@gmail.edu', 'The King');
 INSERT INTO Player VALUES (3, 'dog@gmail.edu', 'Dogbreath');
 
-INSERT INTO PlayerStatus VALUES (1, 23);
-INSERT INTO PlayerStatus VALUES (2, 15);
-INSERT INTO PlaterStatus VALUES (3, 10);
+INSERT INTO PlayerStatus VALUES (1, 15);
+INSERT INTO PlayerStatus VALUES (2, 23);
+INSERT INTO PlayerStatus VALUES (3, 10);
 
 INSERT INTO PlayerGame VALUES (1, 1, 0.00);
 INSERT INTO PlayerGame VALUES (1, 2, 0.00);
