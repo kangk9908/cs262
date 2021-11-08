@@ -39,6 +39,7 @@ router.use(express.json());
 router.get("/", readHelloMessage);
 router.get("/players", readPlayers);
 router.get("/players/:id", readPlayer);
+router.get("/dogbreath", readPlayerScore)
 router.put("/players/:id", updatePlayer);
 router.post('/players', createPlayer);
 router.delete('/players/:id', deletePlayer);
@@ -86,6 +87,16 @@ function readPlayer(req, res, next) {
         .catch(err => {
             next(err);
         });
+}
+
+function readPlayerScore(req, res, next) {
+    db.many("SELECT score FROM Player, PlayerGame WHERE Player.ID = PlayerGame.playerID AND Player.name = 'Dogbreath")
+    .then(data => {
+        res.send(data);
+    })
+    .catch(err => {
+            next(err);
+    });
 }
 
 function updatePlayer(req, res, next) {
