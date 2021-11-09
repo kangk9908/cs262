@@ -9,7 +9,7 @@ export default function DetailsScreen({ route, navigation }) {
     const [data, setData] = useState([]);
 
     useEffect(() => {
-        fetch('https://cs262-monopoly-service.herokuapp.com/players/')
+        fetch('https://hidden-sands-53588.herokuapp.com/players/')
             .then((response) => response.json())
             .then((json) => setData(json))
             .catch((error) => console.error(error))
@@ -22,7 +22,9 @@ export default function DetailsScreen({ route, navigation }) {
             <Text style={globalStyles.title}>{ route.params.email }</Text>
             <Text>ID : { route.params.id }</Text>
             <Text>Aka : { route.params.name }</Text>
-            <Text>Personal Record Score: { route.params.score }</Text>
+            <TouchableOpacity onPress={() => navigation.navigate('Records', route.params)}>
+                <Text>Click to view Personal Record.</Text>
+            </TouchableOpacity>
         </View>
     );
 };

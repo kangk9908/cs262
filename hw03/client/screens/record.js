@@ -3,13 +3,14 @@ import React, { useEffect, useState } from 'react';
 import { ActivityIndicator, View, Text, TouchableOpacity, FlatList, DrawerLayoutAndroidComponent, KeyboardAvoidingViewBase } from 'react-native';
 import { globalStyles } from '../styles/global';
 
-export default function PlayerScreen({ navigation }) {
+export default function RecordsScreen({ route, navigation }) {
     /* Hardcode a "database"/list of movies. */
     const [isLoading, setLoading] = useState(true);
     const [data, setData] = useState([]);
 
     useEffect(() => {
-        fetch('https://hidden-sands-53588.herokuapp.com/players/')
+        console.log(route.params.id)
+        fetch(`https://hidden-sands-53588.herokuapp.com/players/${route.params.id}/pr`)
             .then((response) => response.json())
             .then((json) => setData(json))
             .catch((error) => console.error(error))
@@ -17,17 +18,10 @@ export default function PlayerScreen({ navigation }) {
     }, []);
 
     return (
+
         <View style={{ flex: 1, padding: 24 }}>
             {isLoading ? <ActivityIndicator /> : (
-                <FlatList
-                    data={data}
-                    keyExtractor={({ id }, index) => id.toString()}
-                    renderItem={({ item }) => (
-                        <TouchableOpacity onPress={() => navigation.navigate('Details', item)}>
-                            <Text style={globalStyles.title}>{item.email}</Text>
-                        </TouchableOpacity>
-                    )}
-                />
+                <Text>Personal Record : {data[0].max}</Text>
             )}
         </View>
     );
