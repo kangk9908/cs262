@@ -91,7 +91,7 @@ function readPlayer(req, res, next) {
 }
 
 function readPlayerPR(req, res, next) {
-    db.many("SELECT MAX(score) FROM Player, PlayerGame WHERE Player.ID = PlayerGame.playerID GROUP BY Player.ID, PlayerGame.playerID AND Player.ID = ${id}", req.params)
+    db.many("SELECT MAX(score) FROM Player, PlayerGame WHERE Player.ID = PlayerGame.playerID AND Player.ID = ${id} GROUP BY Player.ID, PlayerGame.playerID", req.params)
     .then(data => {
         res.send(data);
     })
