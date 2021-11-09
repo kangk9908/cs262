@@ -22,6 +22,7 @@ export default function DetailsScreen({ route, navigation }) {
             <Text style={globalStyles.title}>{ route.params.email }</Text>
             <Text>ID : { route.params.id }</Text>
             <Text>Aka : { route.params.name }</Text>
+            <Text>Personal Record Score: { route.params.score }</Text>
         </View>
     );
 };
